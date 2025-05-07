@@ -28,6 +28,7 @@ public class DisplayDataAdapterView extends CursorAdapter {
 
     @Override
     public void bindView(View view, Context context, Cursor cursor) {
+        TextView IndexTextView = view.findViewById(R.id.detectionIndex);
         TextView PhoneTextView = view.findViewById(R.id.detectionPhoneText);
         TextView MessageTextView = view.findViewById(R.id.detectionMessageText);
         TextView DateTextView = view.findViewById(R.id.detectionDateText);
@@ -39,6 +40,7 @@ public class DisplayDataAdapterView extends CursorAdapter {
         int Date =
                 cursor.getColumnIndex(DatabaseAccess.DatabaseOpenHelper.KEY_DATE);
 
+        IndexTextView.setText((cursor.getPosition() + 1) + ".");
         String Phone = cursor.getString(Phone_Number);
         String Messages = cursor.getString(Message);
         String Dates = cursor.getString(Date);

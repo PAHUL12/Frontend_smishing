@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.view.Menu;
 import android.widget.Button;
 import android.widget.TextView;
+import android.widget.ImageButton;
 import android.os.Handler;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -77,6 +78,13 @@ public class MainActivity extends SharedActivity {
             Intent intent = new Intent(MainActivity.this, EducationActivity.class);
             startActivity(intent);
         });
+        ImageButton buttonSafeLinkMini = findViewById(R.id.buttonSafeLinkMini);
+        buttonSafeLinkMini.setOnClickListener(v -> {
+            Intent intent = new Intent(MainActivity.this, com.example.smishingdetectionapp.ui.SafeLinkCheckerActivity.class);
+            startActivity(intent);
+        });
+
+
 
 
         // Database connection
