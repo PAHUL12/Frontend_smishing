@@ -5,54 +5,55 @@ import android.database.Cursor;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ArrayAdapter;
 import android.widget.CursorAdapter;
-import android.widget.Spinner;
 import android.widget.TextView;
 
 import com.example.smishingdetectionapp.R;
 
-//Used for populating listview with correct data while searching.
 public class DisplayDataAdapterView extends CursorAdapter {
 
-    public DisplayDataAdapterView(DetectionsActivity context, Cursor c) {
-        super(context, c, 0);
+    private LayoutInflater inflater;
 
+    public DisplayDataAdapterView(Context context, Cursor c) {
+        super(context, c, 0);
+        inflater = LayoutInflater.from(context);
     }
 
+    // Inflate the view for each list item
     @Override
     public View newView(Context context, Cursor cursor, ViewGroup parent) {
-        return LayoutInflater.from(context).inflate(R.layout.detection_items, parent,
-                false);
+        return inflater.inflate(R.layout.detection_items, parent, false);
     }
 
+    // Bind data to each list item view
     @Override
     public void bindView(View view, Context context, Cursor cursor) {
+        int position = cursor.getPosition();
         TextView IndexTextView = view.findViewById(R.id.detectionIndex);
         TextView PhoneTextView = view.findViewById(R.id.detectionPhoneText);
         TextView MessageTextView = view.findViewById(R.id.detectionMessageText);
         TextView DateTextView = view.findViewById(R.id.detectionDateText);
 
-        int Phone_Number =
-                cursor.getColumnIndex(DatabaseAccess.DatabaseOpenHelper.KEY_PHONENUMBER);
-        int Message =
-                cursor.getColumnIndex(DatabaseAccess.DatabaseOpenHelper.KEY_MESSAGE);
-        int Date =
-                cursor.getColumnIndex(DatabaseAccess.DatabaseOpenHelper.KEY_DATE);
+        TextView numberTextView = view.findViewById(R.id.detectionNumber);
+        TextView phoneTextView = view.findViewById(R.id.detectionPhoneText);
+        TextView messageTextView = view.findViewById(R.id.detectionMessageText);
+        TextView dateTextView = view.findViewById(R.id.detectionDateText);
 
+        // Set dynamic detection number
+        numberTextView.setText(String.valueOf(position + 1));
         IndexTextView.setText((cursor.getPosition() + 1) + ".");
         String Phone = cursor.getString(Phone_Number);
         String Messages = cursor.getString(Message);
         String Dates = cursor.getString(Date);
 
-        PhoneTextView.setText(Phone);
-        MessageTextView.setText(Messages);
-        DateTextView.setText(Dates);
-    }
+        // Get values from database
+        String phone = cursor.getString(cursor.getColumnIndexOrThrow(DatabaseAccess.DatabaseOpenHelper.KEY_PHONENUMBER));
+        String message = cursor.getString(cursor.getColumnIndexOrThrow(DatabaseAccess.DatabaseOpenHelper.KEY_MESSAGE));
+        String date = cursor.getString(cursor.getColumnIndexOrThrow(DatabaseAccess.DatabaseOpenHelper.KEY_DATE));
 
-    @Override
-    public View getView(int position, View convertView, ViewGroup parent) {
-        return super.getView(position, convertView, parent);
+        // Bind data to views
+        phoneTextView.setText(phone);
+        messageTextView.setText(message);
+        dateTextView.setText(date);
     }
-
 }
