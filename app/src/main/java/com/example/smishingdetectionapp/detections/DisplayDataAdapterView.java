@@ -42,9 +42,6 @@ public class DisplayDataAdapterView extends CursorAdapter {
         // Set dynamic detection number
         numberTextView.setText(String.valueOf(position + 1));
         IndexTextView.setText((cursor.getPosition() + 1) + ".");
-        String Phone = cursor.getString(Phone_Number);
-        String Messages = cursor.getString(Message);
-        String Dates = cursor.getString(Date);
 
         // Get values from database
         String phone = cursor.getString(cursor.getColumnIndexOrThrow(DatabaseAccess.DatabaseOpenHelper.KEY_PHONENUMBER));

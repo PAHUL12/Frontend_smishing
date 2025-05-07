@@ -64,7 +64,6 @@
             android:paddingStart="105dp"
             android:paddingEnd="125dp"
             android:text="@string/detectionsBtn"
-            android:text="Risk Scanner"
             android:textSize="20sp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
